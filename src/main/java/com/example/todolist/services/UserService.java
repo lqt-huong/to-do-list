@@ -30,18 +30,19 @@ public class UserService {
     }
 
 
-    public boolean addUser(UserDto userDto){
+    public UserDto addUser(UserDto userDto){
         try {
             UserEntity user = UserMapper.INSTANCE.toUserEntity(userDto);
             user.setId(UUID.randomUUID().toString());
-            //UserEntity user1 = new UserEntity();
-            // user1.setUsername(userDto.getUsername());
-            // user1.setPassword(userDto.getPassword());
-            userRepository.save(user);
 
-            return true;
+            List<UserEntity> user2CheckExisted = userRepository.getUserByUserName(userDto.getUsername());
+            if(user2CheckExisted.size() == 0){
+                userRepository.save(user);
+                return userDto;
+            }
+            return null;
         }catch (Exception e){
-            return false;
+            return null;
         }
     }
 }

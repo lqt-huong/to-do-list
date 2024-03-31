@@ -29,6 +29,17 @@ public class UserController {
         }
     }
 
+    @PostMapping("/createUserLogin")
+    private ResponseEntity<?> createUserLogin(@RequestBody UserDto userLogin) {
+        try {
+            var result = userService.addUser(userLogin);
+            return ResponseEntity.ok(new ResponseDto(List.of("get success"), HttpStatus.OK.value(), result));
+        } catch (Exception e) {
+            return ResponseEntity.ok(new ResponseDto(List.of(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR.value(), null));
+        }
+    }
+
+
     @PostMapping("getalll")
     private ResponseEntity<?> checkUserLogin() {
         try {
@@ -41,7 +52,7 @@ public class UserController {
     @PostMapping("createUser")
     private ResponseEntity<?> addUser(@RequestBody UserDto userDto){
         try {
-            boolean rs = userService.addUser(userDto);
+            var rs = userService.addUser(userDto);
             return ResponseEntity.ok(new ResponseDto(List.of("get success"), HttpStatus.OK.value(), rs));
         } catch (Exception e) {
             return ResponseEntity.ok(new ResponseDto(List.of(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR.value(), null));

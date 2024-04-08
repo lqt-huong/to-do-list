@@ -4,12 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 
-public class UserDto {
+public class TaskDto {
     String id;
-    String username;
-    String password;
+    String name;
+    String user_id;
 }

@@ -2,6 +2,7 @@ package com.example.todolist.controllers;
 
 import com.example.todolist.dtos.ResponseDto;
 import com.example.todolist.dtos.UserDto;
+import com.example.todolist.dtos.TaskDto;
 import com.example.todolist.services.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,4 +28,23 @@ public class TaskController {
             return ResponseEntity.ok(new ResponseDto(List.of(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR.value(), null));
         }
     }
+    @PostMapping("/addTask")
+    private ResponseEntity<?> addTask(@RequestBody TaskDto taskDto) {
+        try {
+            var result = taskService.addTask(taskDto);
+            return ResponseEntity.ok(new ResponseDto(List.of("get success"), HttpStatus.OK.value(), result));
+        } catch (Exception e) {
+            return ResponseEntity.ok(new ResponseDto(List.of(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR.value(), null));
+        }
+    }
+    @PostMapping("/deleteTask")
+    private ResponseEntity<?> deleteTask(@RequestBody TaskDto taskDto) {
+        try {
+            var result = taskService.deleteTask(taskDto);
+            return ResponseEntity.ok(new ResponseDto(List.of("get success"), HttpStatus.OK.value(), result));
+        } catch (Exception e) {
+            return ResponseEntity.ok(new ResponseDto(List.of(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR.value(), null));
+        }
+    }
+
 }

@@ -14,12 +14,12 @@ import java.util.List;
 public interface TaskMapper {
     TaskMapper INSTANCE = Mappers.getMapper(TaskMapper.class);
 
-    TaskDto toTaskDto(TaskEntity paymentDto);
+    TaskDto toTaskDto(TaskEntity taskEntity);
 
     List<TaskDto> toTaskDtos(List<TaskEntity>  paymentDto);
 
 
-    TaskEntity toTaskEntity(TaskEntity taskDto);
+    TaskEntity toTaskEntity(TaskDto taskDto);
 
     List<TaskEntity> toTaskEntityList(List<TaskDto> list);
 

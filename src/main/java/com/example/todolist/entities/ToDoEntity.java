@@ -25,4 +25,8 @@ public class ToDoEntity {
     private String todo_name;
     @Column(name = "task_id")
     private String task_id;
+    @Column(name = "checked")
+    private boolean checked;
+    @Column(name = "serial")
+    private int serial;
 }

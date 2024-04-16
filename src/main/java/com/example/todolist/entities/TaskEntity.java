@@ -20,10 +20,10 @@ import lombok.NoArgsConstructor;
 public class TaskEntity {
     @Id
     String id;
-
-
     @Column(name = "name")
     private String name;
     @Column(name = "user_id")
     private String user_id;
+    @Column(name = "serial")
+    private int serial;
 }

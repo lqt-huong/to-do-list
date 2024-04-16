@@ -30,14 +30,26 @@ public class ToDoController {
             return ResponseEntity.ok(new ResponseDto(List.of(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR.value(), null));
         }
     }
-//    @PostMapping("/deleteTask")
-//    private ResponseEntity<?> deleteTask(@RequestBody TaskDto taskDto) {
-//        try {
-//            var result = taskService.deleteTask(taskDto);
-//            return ResponseEntity.ok(new ResponseDto(List.of("get success"), HttpStatus.OK.value(), result));
-//        } catch (Exception e) {
-//            return ResponseEntity.ok(new ResponseDto(List.of(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR.value(), null));
-//        }
-//    }
+
+    @PostMapping("/deleteToDo")
+    private ResponseEntity<?> deleteToDo(@RequestBody List<ToDoDto> toDoDto) {
+        try {
+            var result = toDoService.deleteToDo(toDoDto);
+            return ResponseEntity.ok(new ResponseDto(List.of("get success"), HttpStatus.OK.value(), result));
+        } catch (Exception e) {
+            return ResponseEntity.ok(new ResponseDto(List.of(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR.value(), null));
+        }
+    }
+
+    @PostMapping("/updateToDo")
+    private ResponseEntity<?> updateToDo(@RequestBody ToDoDto toDoDto) {
+        try {
+            var result = toDoService.updateToDo(toDoDto);
+            return ResponseEntity.ok(new ResponseDto(List.of("get success"), HttpStatus.OK.value(), result));
+        } catch (Exception e) {
+            return ResponseEntity.ok(new ResponseDto(List.of(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR.value(), null));
+        }
+    }
+
 
 }

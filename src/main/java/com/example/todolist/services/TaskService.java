@@ -15,9 +15,7 @@ import com.example.todolist.repositories.ToDoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -28,10 +26,11 @@ public class TaskService {
     public List<TaskDto> getTask(UserDto userDto) {
         List<TaskEntity> taskEntities = taskRepository.getTasks(userDto.getId());
         List<TaskDto> taskDtos = TaskMapper.INSTANCE.toTaskDtos(taskEntities);
+        Collections.sort(taskDtos, Comparator.comparingInt(TaskDto::getSerial));
 
         List<ToDoEntity> toDoEntities = toDoRespository.findAll();
         List<ToDoDto> toDoDtos = ToDoMapper.INSTANCE.toToDoDtos(toDoEntities);
-
+        Collections.sort(toDoDtos, Comparator.comparingInt(ToDoDto::getSerial));
         for (TaskDto task:taskDtos) {
             task.setToDoList(new ArrayList<>());
             for (ToDoDto toDo:toDoDtos) {

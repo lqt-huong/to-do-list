@@ -14,4 +14,5 @@ public class TaskDto {
     String name;
     String user_id;
     List<ToDoDto> toDoList;
+    int serial;
 }

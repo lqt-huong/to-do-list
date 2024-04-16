@@ -25,6 +25,7 @@ public class ToDoService {
     public int addToDo(ToDoDto toDoDto) {
         try {
             toDoDto.setId(UUID.randomUUID().toString());
+            toDoDto.setChecked(false);
             ToDoEntity todo = ToDoMapper.INSTANCE.toToDoEntity(toDoDto);
             toDoRespository.save(todo);
             return 1;
@@ -32,14 +33,24 @@ public class ToDoService {
             return -1;
         }
     }
-//    public int deleteTask(TaskDto taskDto) {
-//        try {
-//            TaskEntity task = TaskMapper.INSTANCE.toTaskEntity(taskDto);
-//            taskRepository.delete(task);
-//            return 1;
-//        }catch(Exception e) {
-//            return -1;
-//        }
-//    }
+    public int deleteToDo(List<ToDoDto> toDoDto) {
+        try {
+            for(ToDoDto i : toDoDto)
+                toDoRespository.deleteById(i.getId());
+            return 1;
+        }catch(Exception e) {
+            return -1;
+        }
+    }
+
+    public int updateToDo(ToDoDto toDoDto) {
+        try {
+            ToDoEntity todo = ToDoMapper.INSTANCE.toToDoEntity(toDoDto);
+            toDoRespository.save(todo);
+            return 1;
+        }catch(Exception e) {
+            return -1;
+        }
+    }
 }
 

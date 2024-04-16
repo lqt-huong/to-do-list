@@ -13,4 +13,6 @@ public class ToDoDto {
     String id;
     String todo_name;
     String task_id;
+    boolean checked;
+    int serial;
 }
